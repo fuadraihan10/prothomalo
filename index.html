@@ -17,24 +17,23 @@
 
     <title>Prothom Alo Navbar</title>
 
-    <!-- Theme tokens used by the layout -->
+    <!-- Theme tokens used by the layout and custom marquee animation -->
     <style type="text/tailwindcss">
         @theme {
-                    --color-primary: #dc140a;
-                --animate-marquee: marquee 25s linear infinite;
-        
-                @keyframes marquee {
-    from {
-        transform: translateX(0);
-    }
+            --color-primary: #dc140a;
+            --animate-marquee: marquee 25s linear infinite;
 
-    to {
-        transform: translateX(-50%);
-    }
-}
+            @keyframes marquee {
+                from {
+                    transform: translateX(0);
+                }
+
+                to {
+                    transform: translateX(-50%);
+                }
             }
-
-            </style>
+        }
+    </style>
 
     <!-- Global font styling -->
     <style>
@@ -81,20 +80,25 @@
 
         </nav>
 
+        <!-- Breaking news ticker below the main navigation -->
         <div class="flex items-center overflow-hidden border-b border-primary py-3 pl-4">
+            <!-- Label for the news ticker -->
             <h5
                 class="shrink-0 border-r border-primary pr-4 text-base font-bold tracking-tight text-primary sm:text-lg md:text-xl select-none">
                 Breaking News
             </h5>
 
+            <!-- Scrollable headlines area -->
             <div class="min-w-0 flex-1 overflow-hidden">
                 <div class="flex w-max animate-marquee hover:[animation-play-state:paused]">
+                    <!-- First copy of the headline text -->
                     <p class="shrink-0 whitespace-nowrap pr-12">
                         The latest updates from Bangladesh and around the world, covering politics, economy, education,
                         technology, sports, and more. Stay tuned for real-time headlines and developing stories as they
                         happen.
                     </p>
 
+                    <!-- Duplicate text is repeated to create a smooth looping marquee -->
                     <p aria-hidden="true" class="shrink-0 whitespace-nowrap pr-12">
                         The latest updates from Bangladesh and around the world, covering politics, economy, education,
                         technology, sports, and more. Stay tuned for real-time headlines and developing stories as they
@@ -103,10 +107,6 @@
                 </div>
             </div>
         </div>
-
-        </div>
-
-
     </header>
 
 </body>
