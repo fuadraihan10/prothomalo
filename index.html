@@ -1,13 +1,14 @@
 <!-- ----------------- -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Page setup -->
+    <!-- Page metadata and browser configuration -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read the latest news from Bangladesh and around the world.">
 
+    <!-- Tailwind CSS browser build for this demo -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Google Font -->
@@ -16,9 +17,9 @@
     <link href="https://fonts.googleapis.com/css2?family=National+Park:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    <title>Prothom Alo Navbar</title>
+    <title>Prothom Alo Navbar &amp; News</title>
 
-    <!-- Theme and marquee animation -->
+    <!-- Theme colors and marquee animation -->
     <style type="text/tailwindcss">
         @theme {
             --color-primary: #dc140a;
@@ -45,27 +46,43 @@
         summary::-webkit-details-marker {
             display: none;
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-marquee {
+                animation: none;
+            }
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
     </style>
 </head>
 
 <body class="m-0 bg-white text-gray-900">
 
-    <!-- Sticky header -->
+    <!-- Sticky site header: navigation and breaking-news ticker only -->
     <header class="sticky top-0 z-50 bg-white">
 
-        <!-- Main navigation -->
-        <nav
+        <!-- Primary navigation landmark -->
+        <nav aria-label="Primary navigation"
             class="flex items-center justify-between gap-4 bg-primary px-4 py-3 text-white shadow-sm sm:px-6 md:px-8 lg:px-10">
 
-            <!-- Brand -->
+            <!-- Brand / home link -->
             <a href="/"
                 class="shrink-0 text-xl font-extrabold tracking-tight transition-opacity duration-200 hover:opacity-80 sm:text-2xl md:text-3xl">
                 Prothom Alo
             </a>
 
-            <!-- Navigation links and search -->
+            <!-- Navigation links and search controls -->
             <div class="flex min-w-0 items-center gap-3 sm:gap-5 md:gap-7">
 
+                <!-- Navigation links -->
                 <ul class="flex items-center gap-3 text-sm font-medium sm:gap-5 md:gap-7 md:text-base">
                     <li>
                         <a href="/" class="whitespace-nowrap transition-opacity duration-200 hover:opacity-75">
@@ -86,13 +103,14 @@
                     </li>
                 </ul>
 
-                <!-- Expandable search -->
+                <!-- Expandable search; hidden on narrow screens in this example -->
                 <details class="group hidden shrink-0 items-center sm:flex">
                     <summary aria-label="Toggle search"
                         class="flex size-9 cursor-pointer list-none items-center justify-center rounded-full transition-colors duration-200 hover:bg-white/15 sm:size-10">
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
                             <circle cx="11" cy="11" r="8"></circle>
                             <path d="m21 21-4.35-4.35"></path>
                         </svg>
@@ -101,32 +119,35 @@
                     <form action="/search" method="GET"
                         class="ml-0 flex max-w-0 items-center overflow-hidden rounded-lg bg-white opacity-0 transition-all duration-300 group-open:ml-2 group-open:max-w-64 group-open:opacity-100">
 
-                        <input type="search" name="q" placeholder="Search news..." aria-label="Search news" required
+                        <label for="site-search" class="sr-only">Search news</label>
+
+                        <input id="site-search" type="search" name="q" placeholder="Search news..." required
                             class="w-40 bg-transparent px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-500 sm:w-48">
 
                         <button type="submit" aria-label="Submit search"
                             class="shrink-0 px-3 py-2 text-primary transition-colors hover:bg-gray-100">
+
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
+                                stroke-linejoin="round" aria-hidden="true">
                                 <circle cx="11" cy="11" r="8"></circle>
                                 <path d="m21 21-4.35-4.35"></path>
                             </svg>
                         </button>
                     </form>
                 </details>
-
             </div>
         </nav>
 
-        <!-- Breaking news ticker -->
-        <div
-            class="flex items-center overflow-hidden border-b-1 border-dashed border-primary shadow-[0_1px_1px_0_rgba(128,128,128,0.25)] py-2.5 pl-4 sm:py-3 sm:pl-6 md:pl-8">
+        <!-- Breaking-news ticker -->
+        <section aria-label="Breaking news"
+            class="flex items-center overflow-hidden border-b-2 border-dashed border-primary py-2.5 pl-4 shadow-[0_1px_1px_0_rgba(128,128,128,0.25)] sm:py-3 sm:pl-6 md:pl-8">
 
-            <h5
+            <!-- Ticker label -->
+            <span
                 class="shrink-0 border-r border-primary pr-3 text-sm font-bold tracking-tight text-primary sm:pr-4 sm:text-base md:text-lg">
                 Breaking News
-            </h5>
+            </span>
 
             <!-- Scrolling headlines -->
             <div class="min-w-0 flex-1 overflow-hidden">
@@ -138,7 +159,7 @@
                         happen.
                     </p>
 
-                    <!-- Duplicate for seamless scrolling -->
+                    <!-- Duplicate text creates a continuous marquee effect -->
                     <p aria-hidden="true" class="shrink-0 whitespace-nowrap pr-12 text-sm leading-6 text-gray-700">
                         The latest updates from Bangladesh and around the world, covering politics, economy, education,
                         technology, sports, and more. Stay tuned for real-time headlines and developing stories as they
@@ -147,12 +168,318 @@
 
                 </div>
             </div>
-        </div>
-
+        </section>
     </header>
+
+    <!-- Main page content; scrolls below the sticky header -->
+    <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+
+        <!-- Page-level heading for screen readers -->
+        <h1 class="sr-only">Prothom Alo News</h1>
+
+        <!-- Latest news section -->
+        <section aria-labelledby="news-heading">
+
+            <!-- Section heading -->
+            <div class="mb-6 flex items-center justify-between border-b-2 border-primary pb-3">
+
+                <h2 id="news-heading" class="text-2xl font-extrabold tracking-tight sm:text-3xl">
+                    Latest News
+                </h2>
+
+                <a href="/news"
+                    class="text-sm font-semibold text-primary transition-colors hover:text-red-800 sm:text-base">
+                    View All &rarr;
+                </a>
+            </div>
+
+            <!-- Featured story and top headlines -->
+            <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
+
+                <!-- Featured news story -->
+                <article class="group min-w-0 lg:col-span-7">
+
+                    <a href="/news/featured" class="block overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c"
+                            alt="Newspapers representing the latest news"
+                            class="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            fetchpriority="high">
+                    </a>
+
+                    <div class="pt-4">
+
+                        <span
+                            class="mb-3 inline-block rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+                            Top Story
+                        </span>
+
+                        <h3
+                            class="text-2xl font-extrabold leading-snug tracking-tight transition-colors group-hover:text-primary sm:text-3xl">
+                            <a href="/news/featured">
+                                Bangladesh and the World: The Stories Shaping Today's Headlines
+                            </a>
+                        </h3>
+
+                        <p class="mt-3 max-w-2xl text-sm leading-7 text-gray-600 sm:text-base">
+                            Stay informed with the latest developments in politics, education, business, technology,
+                            and other important stories from home and abroad.
+                        </p>
+
+                        <!-- Article metadata -->
+                        <div class="mt-4 flex items-center gap-3 text-xs text-gray-500 sm:text-sm">
+                            <span class="font-semibold text-primary">News Desk</span>
+                            <span aria-hidden="true">&bull;</span>
+                            <span>Latest Updates</span>
+                        </div>
+
+                    </div>
+                </article>
+
+                <!-- Top stories sidebar -->
+                <aside class="lg:col-span-5" aria-labelledby="top-stories-heading">
+
+                    <h3 id="top-stories-heading" class="mb-4 border-b border-gray-200 pb-3 text-xl font-bold">
+                        Top Stories
+                    </h3>
+
+                    <div class="divide-y divide-gray-200">
+
+                        <!-- Story 1: Education -->
+                        <article class="group grid grid-cols-3 gap-4 py-4 first:pt-0">
+
+                            <a href="/news/education" class="col-span-1 overflow-hidden rounded-md">
+                                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b"
+                                    alt="Students studying in a classroom"
+                                    class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                    loading="lazy">
+                            </a>
+
+                            <div class="col-span-2">
+                                <span class="text-xs font-bold uppercase tracking-wide text-primary">
+                                    Education
+                                </span>
+
+                                <h4
+                                    class="mt-1 text-base font-bold leading-snug transition-colors group-hover:text-primary sm:text-lg">
+                                    <a href="/news/education">
+                                        Education and the Future: What Students Need to Know
+                                    </a>
+                                </h4>
+
+                                <p class="mt-2 text-xs text-gray-500">
+                                    News Desk &middot; Latest Updates
+                                </p>
+                            </div>
+                        </article>
+
+                        <!-- Story 2: Technology -->
+                        <article class="group grid grid-cols-3 gap-4 py-4">
+
+                            <a href="/news/technology" class="col-span-1 overflow-hidden rounded-md">
+                                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+                                    alt="Technology and digital innovation"
+                                    class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                    loading="lazy">
+                            </a>
+
+                            <div class="col-span-2">
+                                <span class="text-xs font-bold uppercase tracking-wide text-primary">
+                                    Technology
+                                </span>
+
+                                <h4
+                                    class="mt-1 text-base font-bold leading-snug transition-colors group-hover:text-primary sm:text-lg">
+                                    <a href="/news/technology">
+                                        New Technologies Transforming Everyday Life
+                                    </a>
+                                </h4>
+
+                                <p class="mt-2 text-xs text-gray-500">
+                                    Technology Desk &middot; Latest Updates
+                                </p>
+                            </div>
+                        </article>
+
+                        <!-- Story 3: Business -->
+                        <article class="group grid grid-cols-3 gap-4 py-4">
+
+                            <a href="/news/business" class="col-span-1 overflow-hidden rounded-md">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f"
+                                    alt="Business analytics displayed on a computer"
+                                    class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                    loading="lazy">
+                            </a>
+
+                            <div class="col-span-2">
+                                <span class="text-xs font-bold uppercase tracking-wide text-primary">
+                                    Business
+                                </span>
+
+                                <h4
+                                    class="mt-1 text-base font-bold leading-snug transition-colors group-hover:text-primary sm:text-lg">
+                                    <a href="/news/business">
+                                        Business Trends and the Changing Digital Economy
+                                    </a>
+                                </h4>
+
+                                <p class="mt-2 text-xs text-gray-500">
+                                    Business Desk &middot; Latest Updates
+                                </p>
+                            </div>
+                        </article>
+
+                        <!-- Story 4: World -->
+                        <article class="group grid grid-cols-3 gap-4 py-4 last:pb-0">
+
+                            <a href="/news/world" class="col-span-1 overflow-hidden rounded-md">
+                                <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620"
+                                    alt="Government buildings in a city"
+                                    class="aspect-[4/3] h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                    loading="lazy">
+                            </a>
+
+                            <div class="col-span-2">
+                                <span class="text-xs font-bold uppercase tracking-wide text-primary">
+                                    World
+                                </span>
+
+                                <h4
+                                    class="mt-1 text-base font-bold leading-snug transition-colors group-hover:text-primary sm:text-lg">
+                                    <a href="/news/world">
+                                        International Affairs: Key Developments Around the Globe
+                                    </a>
+                                </h4>
+
+                                <p class="mt-2 text-xs text-gray-500">
+                                    World Desk &middot; Latest Updates
+                                </p>
+                            </div>
+                        </article>
+
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- More news section -->
+        <section class="mt-12 sm:mt-16" aria-labelledby="more-news-heading">
+
+            <!-- Section heading -->
+            <div class="mb-6 flex items-center justify-between border-b-2 border-primary pb-3">
+
+                <h2 id="more-news-heading" class="text-2xl font-extrabold tracking-tight sm:text-3xl">
+                    More News
+                </h2>
+
+                <a href="/news"
+                    class="text-sm font-semibold text-primary transition-colors hover:text-red-800 sm:text-base">
+                    Explore All &rarr;
+                </a>
+            </div>
+
+            <!-- More news cards -->
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+                <!-- News card 1: National -->
+                <article class="group min-w-0">
+
+                    <a href="/news/national" class="block overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72"
+                            alt="People working together in an office"
+                            class="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy">
+                    </a>
+
+                    <div class="pt-4">
+                        <span class="text-xs font-bold uppercase tracking-wide text-primary">
+                            National
+                        </span>
+
+                        <h3 class="mt-2 text-xl font-bold leading-snug transition-colors group-hover:text-primary">
+                            <a href="/news/national">
+                                Important National Developments to Follow
+                            </a>
+                        </h3>
+
+                        <p class="mt-2 text-sm leading-6 text-gray-600">
+                            A closer look at the issues, events, and decisions affecting everyday life.
+                        </p>
+
+                        <p class="mt-3 text-xs text-gray-500">
+                            News Desk &middot; Latest Updates
+                        </p>
+                    </div>
+                </article>
+
+                <!-- News card 2: Science -->
+                <article class="group min-w-0">
+
+                    <a href="/news/science" class="block overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d"
+                            alt="Scientific equipment in a laboratory"
+                            class="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy">
+                    </a>
+
+                    <div class="pt-4">
+                        <span class="text-xs font-bold uppercase tracking-wide text-primary">
+                            Science
+                        </span>
+
+                        <h3 class="mt-2 text-xl font-bold leading-snug transition-colors group-hover:text-primary">
+                            <a href="/news/science">
+                                Discoveries and Innovations in Science
+                            </a>
+                        </h3>
+
+                        <p class="mt-2 text-sm leading-6 text-gray-600">
+                            Explore scientific breakthroughs and ideas shaping our understanding of the world.
+                        </p>
+
+                        <p class="mt-3 text-xs text-gray-500">
+                            Science Desk &middot; Latest Updates
+                        </p>
+                    </div>
+                </article>
+
+                <!-- News card 3: Sports -->
+                <article class="group min-w-0">
+
+                    <a href="/news/sports" class="block overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211"
+                            alt="Athletes competing on a running track"
+                            class="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy">
+                    </a>
+
+                    <div class="pt-4">
+                        <span class="text-xs font-bold uppercase tracking-wide text-primary">
+                            Sports
+                        </span>
+
+                        <h3 class="mt-2 text-xl font-bold leading-snug transition-colors group-hover:text-primary">
+                            <a href="/news/sports">
+                                Sports, Competitions, and Stories to Watch
+                            </a>
+                        </h3>
+
+                        <p class="mt-2 text-sm leading-6 text-gray-600">
+                            Follow sporting events, athlete performances, and the latest competition news.
+                        </p>
+
+                        <p class="mt-3 text-xs text-gray-500">
+                            Sports Desk &middot; Latest Updates
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Optional site footer can be added here -->
 
 </body>
 
 </html>
-
 <!-- ----------------- -->
