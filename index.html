@@ -14,6 +14,12 @@
 
     <title>Prothom Alo Navbar</title>
 
+    <style type="text/tailwindcss">
+        @theme {
+            --color-primary: #dc140a;
+        }
+    </style>
+    
     <style>
         body {
             font-family: "National Park", sans-serif;
@@ -24,30 +30,32 @@
 <body class="m-0">
 
     <header class="sticky top-0 z-50">
-        <nav class="flex items-center justify-between bg-[#dc140a] px-4 py-3 text-white shadow-md sm:px-6 md:px-10">
+        <nav class="flex items-center justify-between bg-primary px-4 py-3 text-white shadow-md sm:px-6 md:px-10">
 
 
             <a href="/"
-                class="shrink-0 text-2xl font-extrabold tracking-tight transition-opacity duration-200 hover:opacity-80 md:text-3xl">
+                class="shrink-0 text-2xl font-extrabold tracking-tight transition-opacity duration-200 hover:opacity-80 md:text-3xl select-none">
                 Prothom Alo
             </a>
 
 
             <ul class="flex items-center gap-4 text-sm font-medium sm:gap-6 md:gap-8 md:text-base">
                 <li>
-                    <a href="/" class="relative py-2 transition-colors duration-200 hover:text-white/75">
+                    <a href="/" class="select-none relative py-2 transition-colors duration-200 hover:text-white/75">
                         Home
                     </a>
                 </li>
 
                 <li>
-                    <a href="/news" class="relative py-2 transition-colors duration-200 hover:text-white/75">
+                    <a href="/news"
+                        class="select-none relative py-2 transition-colors duration-200 hover:text-white/75">
                         News
                     </a>
                 </li>
 
                 <li>
-                    <a href="/contact" class="relative py-2 transition-colors duration-200 hover:text-white/75">
+                    <a href="/contact"
+                        class="select-none relative py-2 transition-colors duration-200 hover:text-white/75">
                         Contact
                     </a>
                 </li>
